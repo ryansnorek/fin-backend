@@ -1,12 +1,12 @@
 const router = require('express').Router();
 
-const { getQuery } = require('./utils');
+const Client = require('./utils');
 
-router.get('/search', (req, res, next) => {
+router.post('/search', (req, res, next) => {
   const { query } = req.body;
-  getQuery(query)
-    .then((result) => res.json(result))
-    .catch(next);
+  Client.symbolSearch(query, (error, data, response) => {
+    res.json(data);
+  });
 });
 
 module.exports = router;

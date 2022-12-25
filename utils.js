@@ -1,19 +1,7 @@
-const fetch = require('node-fetch');
+const finnhub = require('finnhub');
 
-const BASE_URL = 'https://finnhub.io/api/v1/';
-const config = {
-  method: 'GET',
-  headers: {
-    'X-Finnhub-Token': process.env.FIN_KEY,
-  },
-};
+const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+api_key.apiKey = process.env.FIN_KEY;
+const finnhubClient = new finnhub.DefaultApi();
 
-const getQuery = async (query) => {
-  return await fetch(`${BASE_URL}/search?q=${query}`, config).then(
-    (res) => res
-  );
-};
-
-module.exports = {
-  getQuery,
-};
+module.exports = finnhubClient;
