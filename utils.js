@@ -1,12 +1,19 @@
-const finnhubClient = async () => {
-  const axios = await import('./node_modules/axios/index.js');
+const fetch = require('node-fetch');
 
-  return axios.create({
-    baseURL: 'https://finnhub.io/api/v1/',
-    headers: {
-      'X-Finnhub-Token': process.env.FIN_KEY,
-    },
-  });
+const BASE_URL = 'https://finnhub.io/api/v1/';
+const config = {
+  method: 'GET',
+  headers: {
+    'X-Finnhub-Token': process.env.FIN_KEY,
+  },
 };
 
-module.exports = finnhubClient;
+const getQuery = async (query) => {
+  return await fetch(`${BASE_URL}/search?q=${query}`, config).then(
+    (res) => res
+  );
+};
+
+module.exports = {
+  getQuery,
+};
