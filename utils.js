@@ -1,5 +1,5 @@
 const finnhubClient = async () => {
-  const axios = await import('./node_modules/axios');
+  const axios = await import('./node_modules/axios/index.js');
 
   return axios.create({
     baseURL: 'https://finnhub.io/api/v1/',
